@@ -1,4 +1,4 @@
-package xyz.parisi.test.testgame;
+package xyz.parisi.test.multitask;
 
 import javafx.scene.layout.Pane;
 
@@ -30,9 +30,9 @@ public class Screen {
         windows[1] = w;
         appRoot.getChildren().addAll((Pane) w);
         w.myHeightProperty().set(height);
-        w.myWidthProperty().set(width/2);
+        w.myWidthProperty().set(width / 2);
         w.layoutXProperty().set(width);
-        w.animate(width/2, 0, width/2, height);
-        windows[0].animate(0, 0, width/2, height);
+        w.animate(width / 2, 0, width / 2, height);
+        windows[0].animate(0, 0, width / 2, height);
     }
 }

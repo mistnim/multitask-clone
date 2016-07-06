@@ -1,4 +1,4 @@
-package xyz.parisi.test.testgame;
+package xyz.parisi.test.multitask.balancegame;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -8,21 +8,22 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import xyz.parisi.test.multitask.MiniGame;
+import xyz.parisi.test.multitask.Window;
 
 /**
  * Created by Daniele Parisi (daniele@parisi.xyz) on 6/1/16.
  */
 
-class BalanceGame extends Pane implements MiniGame, Window {
+public class BalanceGame extends Pane implements MiniGame, Window {
     SimpleDoubleProperty myWidth = new SimpleDoubleProperty();
     SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
-
     Ball ball = new Ball();
     Rectangle bar = new Rectangle(-50, -5, 100, 10);
     Rectangle bg = new Rectangle();
     Pane objects = new Pane();
 
-    BalanceGame(double w, double h) {
+    public BalanceGame(double w, double h) {
         myWidth.set(w);
         myHeight.set(h);
         bg.heightProperty().bind(myHeight);
@@ -49,7 +50,7 @@ class BalanceGame extends Pane implements MiniGame, Window {
         return myHeight;
     }
 
-    public boolean update(double delta, boolean isPressedS, boolean isPressedF) {
+    public boolean update(double delta, boolean isPressedS, boolean isPressedF, long time) {
         if (isPressedF)
             bar.setRotate(bar.getRotate() + 0.7);
         if (isPressedS)

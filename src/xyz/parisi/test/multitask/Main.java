@@ -1,14 +1,13 @@
-package xyz.parisi.test.testgame;
+package xyz.parisi.test.multitask;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
+import xyz.parisi.test.multitask.arrowsgame.ArrowsGame;
+import xyz.parisi.test.multitask.balancegame.BalanceGame;
 
 import java.util.HashMap;
 
@@ -35,7 +34,14 @@ public class Main extends Application {
 
         Scene scene = new Scene(appRoot);
 
-        scene.setOnKeyPressed(event -> keys.put(event.getCode(), true));
+        scene.setOnKeyPressed(event -> {
+            KeyCode k = event.getCode();
+            if (k == KeyCode.E)
+                arrowsGame.goUp();
+            if (k == KeyCode.D)
+                arrowsGame.goDown();
+            keys.put(k, true);
+        });
 
         scene.setOnKeyReleased(event -> keys.put(event.getCode(), false));
         AnimationTimer at = new AnimationTimer() {
@@ -48,13 +54,14 @@ public class Main extends Application {
                 }
                 double delta = (now - oldTime) / 1_000_000;
                 if (!gameOver) {
-                    if (!balanceGame.update(delta, isPressed(KeyCode.S), isPressed(KeyCode.F)))
+                    if (!balanceGame.update(delta, isPressed(KeyCode.S), isPressed(KeyCode.F), now))
+                        gameOver = true;
+                    if (!arrowsGame.update(delta, false, false, now))
                         gameOver = true;
                 }
                 oldTime = now;
             }
         };
-
         at.start();
 
         primaryStage.setMinHeight(HEIGHT);

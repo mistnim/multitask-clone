@@ -1,4 +1,4 @@
-package xyz.parisi.test.testgame;
+package xyz.parisi.test.multitask.balancegame;
 
 import javafx.scene.shape.Circle;
 
@@ -19,11 +19,9 @@ class Ball extends Circle {
         angle = Math.toRadians(angle);
         xSpeed = xSpeed + (Math.sin(angle) * Math.cos(angle) * G * delta);
         xPos += xSpeed;
-        setTranslateX(xPos + Math.cos(Math.PI/2 - angle) * 10);
-        //setTranslateX(xPos);
-        setTranslateY(Math.tan(angle) * xPos - Math.sin(Math.PI/2 - angle) * 10);
-        //setTranslateY(Math.tan(angle));
-        if (xPos > 50 || xPos < -50) {
+        setTranslateX(xPos + Math.cos(Math.PI / 2 - angle) * 10);
+        setTranslateY(Math.tan(angle) * xPos - Math.sin(Math.PI / 2 - angle) * 10);
+        if (xPos > Math.cos(angle) * 50 || xPos < -Math.cos(angle) * 50) {
             return false;
         }
         return true;
