@@ -1,4 +1,4 @@
-package xyz.parisi.test.multitask;
+package xyz.parisi.unical.multitask;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
@@ -6,10 +6,6 @@ import javafx.animation.Timeline;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.util.Duration;
-
-/**
- * Created by Daniele Parisi (daniele@parisi.xyz) on 6/15/16.
- */
 
 public interface Window {
     SimpleDoubleProperty myWidthProperty();

@@ -1,12 +1,9 @@
-package xyz.parisi.test.multitask.arrowsgame;
+package xyz.parisi.unical.multitask.arrowsgame;
 
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 
-/**
- * Created by daniele on 7/4/16.
- */
 class Bar extends Pane {
     private int level = 3;
     private final double HEIGHT = 130;

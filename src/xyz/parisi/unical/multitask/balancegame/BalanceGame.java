@@ -1,31 +1,29 @@
-package xyz.parisi.test.multitask.balancegame;
+package xyz.parisi.unical.multitask.balancegame;
 
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
-import xyz.parisi.test.multitask.MiniGame;
-import xyz.parisi.test.multitask.Window;
-
-/**
- * Created by Daniele Parisi (daniele@parisi.xyz) on 6/1/16.
- */
+import xyz.parisi.unical.multitask.Keyboard;
+import xyz.parisi.unical.multitask.MiniGame;
+import xyz.parisi.unical.multitask.Window;
 
 public class BalanceGame extends Pane implements MiniGame, Window {
-    SimpleDoubleProperty myWidth = new SimpleDoubleProperty();
-    SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
-    Ball ball = new Ball();
-    Rectangle bar = new Rectangle(-50, -5, 100, 10);
-    Rectangle bg = new Rectangle();
-    Pane objects = new Pane();
+    private SimpleDoubleProperty myWidth = new SimpleDoubleProperty();
+    private SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
+    private Ball ball = new Ball();
+    private Rectangle bar = new Rectangle(-50, -5, 100, 10);
+    private Pane objects = new Pane();
 
     public BalanceGame(double w, double h) {
         myWidth.set(w);
         myHeight.set(h);
+        Rectangle bg = new Rectangle();
         bg.heightProperty().bind(myHeight);
         bg.widthProperty().bind(myWidth);
         bg.setFill(Color.PINK);
@@ -50,12 +48,12 @@ public class BalanceGame extends Pane implements MiniGame, Window {
         return myHeight;
     }
 
-    public boolean update(double delta, boolean isPressedS, boolean isPressedF, long time) {
-        if (isPressedF)
+    public boolean update(double timeDelta, long currentTime, Keyboard keyboard) {
+        if (keyboard.isPressed(KeyCode.F))
             bar.setRotate(bar.getRotate() + 0.7);
-        if (isPressedS)
+        if (keyboard.isPressed(KeyCode.S))
             bar.setRotate(bar.getRotate() - 0.7);
-        return ball.update(delta, bar.getRotate());
+        return ball.update(timeDelta, bar.getRotate());
     }
 
     void playIntro() {
