@@ -12,20 +12,19 @@ import xyz.parisi.unical.multitask.RandomProvider;
 import xyz.parisi.unical.multitask.Window;
 
 import java.util.Iterator;
-import java.util.Random;
 
 public class ArrowsGame extends Pane implements MiniGame, Window {
     private SimpleDoubleProperty myWidth = new SimpleDoubleProperty();
     private SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
-    private Random rand = new Random();
     private Bar bar = new Bar();
-    private Pane objects = new Pane();
     private Pane arrows = new Pane();
-    private long lastPressTimeUp = 0;
-    private long lastPressTimeDown = 0;
-
-    private boolean firstUpdate = true;
+    private long lastTimeKeyUp = 0;
+    private long lastTimeKeyDown = 0;
+    private Rectangle bg;
+    private boolean alternate = true;
+    private boolean isFirstUpdate = true;
     private long nextArrowTime;
+
     public SimpleDoubleProperty myWidthProperty() {
         return myWidth;
     }
@@ -34,14 +33,21 @@ public class ArrowsGame extends Pane implements MiniGame, Window {
         return myHeight;
     }
 
+    @Override
+    public String getInstructionText() {
+        return "Move up and down to avoid the arrows!\nUse the UP and DOWN arrow keys";
+
+    }
+
     public ArrowsGame(double w, double h) {
         myHeight.set(h);
         myWidth.set(w);
-        Rectangle bg = new Rectangle();
+        bg = new Rectangle();
         bg.heightProperty().bind(myHeight);
         bg.widthProperty().bind(myWidth);
         bg.setFill(Color.AZURE);
-        bg.setStroke(Color.GRAY);
+        bg.setStroke(Color.BLACK);
+        Pane objects = new Pane();
         objects.layoutXProperty().bind(myWidth.divide(2));
         objects.layoutYProperty().bind(myHeight.divide(2));
 
@@ -50,31 +56,39 @@ public class ArrowsGame extends Pane implements MiniGame, Window {
         getChildren().addAll(bg, objects);
     }
 
-    public void goUp() {
+    private void goUp() {
         bar.goUp();
     }
 
-    public void goDown() {
+    private void goDown() {
         bar.goDown();
     }
 
     public boolean update(double timeDelta, long currentTime, Keyboard keyboard) {
+        // /* workaround javafx graphics bug
+        if (alternate)
+            bg.setTranslateY(1);
+        else
+            bg.setTranslateY(0);
+        alternate = !alternate;
+        // */
+
         boolean keyUp = keyboard.isPressed(KeyCode.E);
         boolean keyDown = keyboard.isPressed(KeyCode.D);
 
-        long pressSpeed = 200_000_000;
-        if (keyUp && currentTime - lastPressTimeUp > pressSpeed) {
+        final long intervalBetweenPresses = 170_000_000;
+        if (keyUp && (currentTime - lastTimeKeyUp) > intervalBetweenPresses) {
             goUp();
-            lastPressTimeUp = currentTime;
+            lastTimeKeyUp = currentTime;
         }
-        if (keyDown && currentTime - lastPressTimeDown > pressSpeed) {
+        if (keyDown && currentTime - lastTimeKeyDown > intervalBetweenPresses) {
             goDown();
-            lastPressTimeDown = currentTime;
+            lastTimeKeyDown = currentTime;
         }
 
-        if (firstUpdate) {
+        if (isFirstUpdate) {
             nextArrowTime = currentTime + (long) (RandomProvider.getNextExponential() * 1_000_000);
-            firstUpdate = false;
+            isFirstUpdate = false;
         } else {
             if (currentTime > nextArrowTime) {
                 if (arrows.getChildren().size() < 4) {

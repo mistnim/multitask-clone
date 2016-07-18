@@ -18,7 +18,6 @@ public class BalanceGame extends Pane implements MiniGame, Window {
     private SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
     private Ball ball = new Ball();
     private Rectangle bar = new Rectangle(-50, -5, 100, 10);
-    private Pane objects = new Pane();
 
     public BalanceGame(double w, double h) {
         myWidth.set(w);
@@ -32,10 +31,16 @@ public class BalanceGame extends Pane implements MiniGame, Window {
         bar.setFill(Color.BLACK);
         bar.setRotate(0.2);
         ball.setFill(Color.RED);
+        Pane objects = new Pane();
         objects.getChildren().addAll(bar, ball);
         objects.layoutXProperty().bind(myWidth.divide(2));
         objects.layoutYProperty().bind(myHeight.divide(2));
         getChildren().addAll(bg, objects);
+    }
+
+    @Override
+    public String getInstructionText() {
+        return "Keep the ball balanced on the platform!\nUse the LEFT and RIGHT arrow keys";
     }
 
     @Override

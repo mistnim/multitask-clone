@@ -9,7 +9,7 @@ import xyz.parisi.unical.multitask.RandomProvider;
 
 import javafx.util.Duration;
 
-public class Arrow extends Polygon {
+class Arrow extends Polygon {
     private double WIDTH;
     private double HEIGHT;
     private double BAR_WIDTH;
@@ -58,12 +58,12 @@ public class Arrow extends Polygon {
             return false;
         if (direction == Direction.LEFT) {
             setTranslateX(getTranslateX() - SPEED * delta);
-            if (getTranslateX() < -40) {
+            if (getTranslateX() < -20) {
                 fading.play();
             }
         } else {
             setTranslateX(getTranslateX() + SPEED * delta);
-            if (getTranslateX() > 40 - WIDTH) {
+            if (getTranslateX() > 20 - WIDTH) {
                 fading.play();
             }
         }
