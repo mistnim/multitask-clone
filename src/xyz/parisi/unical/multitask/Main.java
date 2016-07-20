@@ -1,6 +1,7 @@
 package xyz.parisi.unical.multitask;
 
 import javafx.animation.AnimationTimer;
+import javafx.animation.Timeline;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
@@ -11,7 +12,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     private boolean playing = true;
-    private Pane appRoot = new Pane();
+    private final Pane appRoot = new Pane();
     private final double WIDTH = 800;
     private final double HEIGHT = 600;
     private Scene scene;

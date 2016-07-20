@@ -1,6 +1,7 @@
 package xyz.parisi.unical.multitask.targetgame;
 
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -9,11 +10,14 @@ import xyz.parisi.unical.multitask.Keyboard;
 import xyz.parisi.unical.multitask.MiniGame;
 import xyz.parisi.unical.multitask.Window;
 
+import java.util.Iterator;
+
 public class TargetGame extends Pane implements MiniGame, Window {
-    private SimpleDoubleProperty myWidth = new SimpleDoubleProperty();
-    private SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
+    private final SimpleDoubleProperty myWidth = new SimpleDoubleProperty();
+    private final SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
     static final Color BG_COLOR = Color.LIGHTYELLOW;
-    private Ring ring = new Ring();
+    private final Ring ring = new Ring();
+    private final Pane arrows = new Pane();
 
     @Override
     public String getInstructionText() {
@@ -31,8 +35,19 @@ public class TargetGame extends Pane implements MiniGame, Window {
         Pane objects = new Pane();
         objects.layoutXProperty().bind(myWidth.divide(2));
         objects.layoutYProperty().bind(myHeight.divide(2));
-        objects.getChildren().addAll(ring, new Arrow());
+        objects.getChildren().addAll(ring, arrows);
+        arrows.getChildren().addAll(new Arrow(ring));
         getChildren().addAll(bg, objects);
+    }
+
+    @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
     }
 
     @Override
@@ -41,6 +56,20 @@ public class TargetGame extends Pane implements MiniGame, Window {
             ring.moveCounterClockWise();
         if (keyboard.isPressed(KeyCode.R))
             ring.moveClockWise();
+
+        Iterator<Node> it = arrows.getChildren().iterator();
+        while (it.hasNext()) {
+            Arrow a = (Arrow) it.next();
+            if (!a.update(timeDelta)) {
+                it.remove();
+                continue;
+            }
+            if (a.detectCollision()) {
+                System.out.println("as d");
+                return false;
+            }
+        }
+
         return true;
     }
 

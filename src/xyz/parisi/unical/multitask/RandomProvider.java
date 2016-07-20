@@ -3,7 +3,7 @@ package xyz.parisi.unical.multitask;
 import java.util.Random;
 
 abstract public class RandomProvider {
-    static private Random rand = new Random();
+    static private final Random rand = new Random();
 
     public static double getNextExponential() {
         return Math.log(1 - rand.nextDouble()) / (-1);

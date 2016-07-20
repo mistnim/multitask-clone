@@ -18,8 +18,8 @@ class Arrow extends Polygon {
     private static final double DISTANCE = 170;
     private static final double SPEED = 0.04;
     private boolean dead = false;
-    private Bar bar;
-    private Timeline fading = new Timeline();
+    private final Bar bar;
+    private final Timeline fading = new Timeline();
 
     Arrow(Bar bar) {
         this.bar = bar;

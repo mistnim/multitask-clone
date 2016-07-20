@@ -8,7 +8,7 @@ class Bar extends Pane {
     private int level = 3;
     private final double HEIGHT = 130;
     private final double WIDTH = 10;
-    private Rectangle[] boxes = new Rectangle[5];
+    private final Rectangle[] boxes = new Rectangle[5];
     private final Color FILL = Color.BLUE;
 
     Bar() {

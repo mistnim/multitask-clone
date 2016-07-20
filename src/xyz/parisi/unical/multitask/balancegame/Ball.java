@@ -17,9 +17,6 @@ class Ball extends Circle {
         xPos += xSpeed;
         setTranslateX(xPos + Math.cos(Math.PI / 2 - angle) * 10);
         setTranslateY(Math.tan(angle) * xPos - Math.sin(Math.PI / 2 - angle) * 10);
-        if (xPos > Math.cos(angle) * 50 || xPos < -Math.cos(angle) * 50) {
-            return false;
-        }
-        return true;
+        return !(xPos > Math.cos(angle) * 50 || xPos < -Math.cos(angle) * 50);
     }
 }

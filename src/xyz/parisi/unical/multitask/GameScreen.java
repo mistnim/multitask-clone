@@ -5,12 +5,12 @@ import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 class GameScreen {
-    private double width;
-    private double height;
-    private Pane root;
+    private final double width;
+    private final double height;
+    private final Pane root;
     private int windowsOnScreen = 0;
 
-    private Window[] windows = new Window[4];
+    private final Window[] windows = new Window[4];
 
     GameScreen(double width, double height, Pane root) {
         this.width = width;

@@ -1,5 +1,6 @@
 package xyz.parisi.unical.multitask;
 
+import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
@@ -18,7 +19,8 @@ import javafx.util.Duration;
 class Message extends StackPane {
     private final int WIDTH = 270;
     private final int HEIGHT = 140;
-    private Circle clip = new Circle(WIDTH/2, HEIGHT/2, 0);
+    private final Circle clip = new Circle(WIDTH/2, HEIGHT/2, 0);
+    private final Interpolator interpolator = Interpolator.SPLINE(0.7,0, 0.3, 1);
 
     Message(String text) {
         setClip(clip);
@@ -35,14 +37,14 @@ class Message extends StackPane {
 
     private void fadeIn() {
         Timeline fadeIn = new Timeline();
-        fadeIn.getKeyFrames().add(new KeyFrame(Duration.millis(200), new KeyValue(clip.radiusProperty(), 200)));
+        fadeIn.getKeyFrames().add(new KeyFrame(Duration.millis(300), new KeyValue(clip.radiusProperty(), 200, interpolator)));
         fadeIn.play();
 
     }
 
     Timeline fadeOut() {
         Timeline fadeOut = new Timeline();
-        fadeOut.getKeyFrames().add(new KeyFrame(Duration.millis(300), new KeyValue(clip.radiusProperty(), 0)));
+        fadeOut.getKeyFrames().add(new KeyFrame(Duration.millis(300), new KeyValue(clip.radiusProperty(), 0, interpolator)));
         fadeOut.play();
         return fadeOut;
     }

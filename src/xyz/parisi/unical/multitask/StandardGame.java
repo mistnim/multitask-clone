@@ -12,22 +12,22 @@ import xyz.parisi.unical.multitask.targetgame.TargetGame;
 
 class StandardGame extends Pane {
     private long levelStartTime;
-    private Keyboard keyboard = new Keyboard();
+    private final Keyboard keyboard = new Keyboard();
     private long oldTime;
     private boolean isFirstFrame = true;
     private int level = 0;
     private MiniGame[] miniGames;
-    private Scene scene;
+    private final Scene scene;
     private final double WIDTH;
     private final double HEIGHT;
     private GameScreen gameScreen;
     private long previouslyElapsedTime = 0;
-    private long currentlevelElepasedTime;
+    private long currentlyElapsedTime;
     private boolean playing = true;
-    private Text score = new Text();
+    private final Text score = new Text();
 
     private long getScore() {
-        return (previouslyElapsedTime + currentlevelElepasedTime) / 1_000_000_000L;
+        return (previouslyElapsedTime + currentlyElapsedTime) / 1_000_000_000L;
     }
 
     private void setPlayKeyboardEvents() {
@@ -71,19 +71,17 @@ class StandardGame extends Pane {
             return;
         }
 
-        currentlevelElepasedTime = now - levelStartTime;
+        currentlyElapsedTime = now - levelStartTime;
 
         // launches new miniGames when it is their moment
-        for (int i = 0; i < 2; ++i) {
-            if (level == i && currentlevelElepasedTime > 5_000_000_000L * (i + 1)) {
-                level += 1;
-                isFirstFrame = true;
-                previouslyElapsedTime += currentlevelElepasedTime;
-                currentlevelElepasedTime = 0;
-                playing = false;
-                final String instructionMessage = miniGames[level].getInstructionText();
-                gameScreen.setNewWindow((Window) miniGames[level]).setOnFinished(event -> displayMessage(instructionMessage));
-            }
+        if (level < 2 && currentlyElapsedTime > 5_000_000_000L) {
+            level += 1;
+            isFirstFrame = true;
+            previouslyElapsedTime += currentlyElapsedTime;
+            currentlyElapsedTime = 0;
+            playing = false;
+            final String instructionMessage = miniGames[level].getInstructionText();
+            gameScreen.setNewWindow((Window) miniGames[level]).setOnFinished(event -> displayMessage(instructionMessage));
         }
 
         double delta = (now - oldTime) / 1_000_000;

@@ -8,7 +8,7 @@ import java.util.HashMap;
  * Created by daniele on 7/13/16.sa
  */
 public class Keyboard {
-    private HashMap<KeyCode, Boolean> keys = new HashMap<>();
+    private final HashMap<KeyCode, Boolean> keys = new HashMap<>();
 
     void press(KeyCode c) {
         keys.put(c, true);

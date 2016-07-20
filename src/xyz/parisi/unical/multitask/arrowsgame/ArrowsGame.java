@@ -14,13 +14,13 @@ import xyz.parisi.unical.multitask.Window;
 import java.util.Iterator;
 
 public class ArrowsGame extends Pane implements MiniGame, Window {
-    private SimpleDoubleProperty myWidth = new SimpleDoubleProperty();
-    private SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
-    private Bar bar = new Bar();
-    private Pane arrows = new Pane();
+    private final SimpleDoubleProperty myWidth = new SimpleDoubleProperty();
+    private final SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
+    private final Bar bar = new Bar();
+    private final Pane arrows = new Pane();
     private long lastTimeKeyUp = 0;
     private long lastTimeKeyDown = 0;
-    private Rectangle bg;
+    private final Rectangle bg;
     private boolean alternate = true;
     private boolean isFirstUpdate = true;
     private long nextArrowTime;
@@ -34,9 +34,18 @@ public class ArrowsGame extends Pane implements MiniGame, Window {
     }
 
     @Override
+    public void pause() {
+
+    }
+
+    @Override
+    public void resume() {
+
+    }
+
+    @Override
     public String getInstructionText() {
         return "Move up and down to avoid the arrows!\nUse the UP and DOWN arrow keys";
-
     }
 
     public ArrowsGame(double w, double h) {
@@ -76,7 +85,7 @@ public class ArrowsGame extends Pane implements MiniGame, Window {
         boolean keyUp = keyboard.isPressed(KeyCode.E);
         boolean keyDown = keyboard.isPressed(KeyCode.D);
 
-        final long intervalBetweenPresses = 170_000_000;
+        final long intervalBetweenPresses = 190_000_000;
         if (keyUp && (currentTime - lastTimeKeyUp) > intervalBetweenPresses) {
             goUp();
             lastTimeKeyUp = currentTime;

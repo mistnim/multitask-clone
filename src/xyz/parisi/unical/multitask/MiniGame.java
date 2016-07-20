@@ -4,4 +4,8 @@ public interface MiniGame {
     boolean update(double timeDelta, long currentTime, Keyboard keyboard);
 
     String getInstructionText();
+
+    void pause();
+    void resume();
+
 }
