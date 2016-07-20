@@ -7,5 +7,6 @@ public interface MiniGame {
 
     void pause();
     void resume();
+    void showGameOver();
 
 }

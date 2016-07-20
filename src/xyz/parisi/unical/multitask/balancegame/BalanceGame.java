@@ -9,6 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
+import xyz.parisi.unical.multitask.Cross;
 import xyz.parisi.unical.multitask.Keyboard;
 import xyz.parisi.unical.multitask.MiniGame;
 import xyz.parisi.unical.multitask.Window;
@@ -18,6 +19,7 @@ public class BalanceGame extends Pane implements MiniGame, Window {
     private final SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
     private final Ball ball = new Ball();
     private final Rectangle bar = new Rectangle(-50, -5, 100, 10);
+    private Pane objects = new Pane();
 
     public BalanceGame(double w, double h) {
         myWidth.set(w);
@@ -25,17 +27,21 @@ public class BalanceGame extends Pane implements MiniGame, Window {
         Rectangle bg = new Rectangle();
         bg.heightProperty().bind(myHeight);
         bg.widthProperty().bind(myWidth);
-        bg.setFill(Color.PINK);
+        bg.setFill(Color.LIGHTCORAL.desaturate());
         bg.setStroke(Color.GRAY);
 
         bar.setFill(Color.BLACK);
         bar.setRotate(0.2);
         ball.setFill(Color.RED);
-        Pane objects = new Pane();
         objects.getChildren().addAll(bar, ball);
         objects.layoutXProperty().bind(myWidth.divide(2));
         objects.layoutYProperty().bind(myHeight.divide(2));
         getChildren().addAll(bg, objects);
+    }
+
+    @Override
+    public void showGameOver() {
+        objects.getChildren().addAll(new Cross());
     }
 
     @Override

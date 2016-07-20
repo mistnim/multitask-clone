@@ -11,7 +11,7 @@ import javafx.util.Duration;
 import xyz.parisi.unical.multitask.RandomProvider;
 
 class Arrow extends Polygon {
-    private final static Color COLOR = Color.GRAY;
+    private final static Color COLOR = Color.BLACK;
     private final static double WIDTH = 12;
     private final static double LENGTH = 14;
     private final Translate translate = new Translate(0, -100);
@@ -32,7 +32,7 @@ class Arrow extends Polygon {
 
     private void fadeIn() {
         Timeline f = new Timeline(new KeyFrame(Duration.millis(700), new KeyValue(fillProperty(), COLOR)),
-                new KeyFrame(Duration.millis(2000), new KeyValue(fillProperty(), COLOR)));
+                new KeyFrame(Duration.millis(2500), new KeyValue(fillProperty(), COLOR)));
         f.play();
         f.setOnFinished(event -> status = Status.MOVING);
     }

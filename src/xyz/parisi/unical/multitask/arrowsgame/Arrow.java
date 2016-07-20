@@ -16,7 +16,7 @@ class Arrow extends Polygon {
     private Direction direction;
     private int level;
     private static final double DISTANCE = 170;
-    private static final double SPEED = 0.04;
+    private static final double SPEED = 0.05;
     private boolean dead = false;
     private final Bar bar;
     private final Timeline fading = new Timeline();

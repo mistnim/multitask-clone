@@ -6,9 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import xyz.parisi.unical.multitask.Keyboard;
-import xyz.parisi.unical.multitask.MiniGame;
-import xyz.parisi.unical.multitask.Window;
+import xyz.parisi.unical.multitask.*;
 
 import java.util.Iterator;
 
@@ -18,10 +16,18 @@ public class TargetGame extends Pane implements MiniGame, Window {
     static final Color BG_COLOR = Color.LIGHTYELLOW;
     private final Ring ring = new Ring();
     private final Pane arrows = new Pane();
+    private boolean isFirstUpdate = true;
+    private long nextArrowTime;
+    private Pane objects = new Pane();
 
     @Override
     public String getInstructionText() {
         return null;
+    }
+
+    @Override
+    public void showGameOver() {
+        objects.getChildren().addAll(new Cross());
     }
 
     public TargetGame(double w, double h) {
@@ -32,11 +38,9 @@ public class TargetGame extends Pane implements MiniGame, Window {
         bg.widthProperty().bind(myWidth);
         bg.setFill(BG_COLOR);
         bg.setStroke(Color.BLACK);
-        Pane objects = new Pane();
         objects.layoutXProperty().bind(myWidth.divide(2));
         objects.layoutYProperty().bind(myHeight.divide(2));
         objects.getChildren().addAll(ring, arrows);
-        arrows.getChildren().addAll(new Arrow(ring));
         getChildren().addAll(bg, objects);
     }
 
@@ -60,17 +64,30 @@ public class TargetGame extends Pane implements MiniGame, Window {
         Iterator<Node> it = arrows.getChildren().iterator();
         while (it.hasNext()) {
             Arrow a = (Arrow) it.next();
+            if (a.detectCollision())
+                return false;
             if (!a.update(timeDelta)) {
                 it.remove();
-                continue;
             }
-            if (a.detectCollision()) {
-                System.out.println("as d");
-                return false;
+        }
+
+        if (isFirstUpdate) {
+            nextArrowTime = getNextArrowTime(currentTime);
+            isFirstUpdate = false;
+        } else {
+            if (currentTime > nextArrowTime) {
+                if (arrows.getChildren().size() < 4) {
+                    nextArrowTime = getNextArrowTime(currentTime);
+                    arrows.getChildren().addAll(new Arrow(ring));
+                }
             }
         }
 
         return true;
+    }
+
+    private long getNextArrowTime(long currentTime) {
+        return currentTime + 1500_000_000L + (long) (RandomProvider.getNextExponential() * 3_500_000_000L);
     }
 
     @Override

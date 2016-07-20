@@ -6,10 +6,7 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
-import xyz.parisi.unical.multitask.Keyboard;
-import xyz.parisi.unical.multitask.MiniGame;
-import xyz.parisi.unical.multitask.RandomProvider;
-import xyz.parisi.unical.multitask.Window;
+import xyz.parisi.unical.multitask.*;
 
 import java.util.Iterator;
 
@@ -24,6 +21,7 @@ public class ArrowsGame extends Pane implements MiniGame, Window {
     private boolean alternate = true;
     private boolean isFirstUpdate = true;
     private long nextArrowTime;
+    private Pane objects = new Pane();
 
     public SimpleDoubleProperty myWidthProperty() {
         return myWidth;
@@ -56,13 +54,17 @@ public class ArrowsGame extends Pane implements MiniGame, Window {
         bg.widthProperty().bind(myWidth);
         bg.setFill(Color.AZURE);
         bg.setStroke(Color.BLACK);
-        Pane objects = new Pane();
         objects.layoutXProperty().bind(myWidth.divide(2));
         objects.layoutYProperty().bind(myHeight.divide(2));
 
         arrows.getChildren().addAll(new Arrow(bar));
         objects.getChildren().addAll(bar, arrows);
         getChildren().addAll(bg, objects);
+    }
+
+    @Override
+    public void showGameOver() {
+        objects.getChildren().addAll(new Cross());
     }
 
     private void goUp() {
@@ -100,8 +102,8 @@ public class ArrowsGame extends Pane implements MiniGame, Window {
             isFirstUpdate = false;
         } else {
             if (currentTime > nextArrowTime) {
-                if (arrows.getChildren().size() < 4) {
-                    nextArrowTime = currentTime + (long) (RandomProvider.getNextExponential() * 3_000_000_000L);
+                if (arrows.getChildren().size() < 5) {
+                    nextArrowTime = currentTime + (long) (RandomProvider.getNextExponential() * 2_000_000_000L);
                     arrows.getChildren().addAll(new Arrow(bar));
                 }
             }

@@ -1,10 +1,14 @@
 package xyz.parisi.unical.multitask;
 
+import javafx.animation.FadeTransition;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.util.Duration;
 import xyz.parisi.unical.multitask.arrowsgame.ArrowsGame;
 import xyz.parisi.unical.multitask.balancegame.BalanceGame;
 import xyz.parisi.unical.multitask.targetgame.TargetGame;
@@ -23,7 +27,7 @@ class StandardGame extends Pane {
     private GameScreen gameScreen;
     private long previouslyElapsedTime = 0;
     private long currentlyElapsedTime;
-    private boolean playing = true;
+    private boolean playing = false;
     private final Text score = new Text();
 
     private long getScore() {
@@ -43,6 +47,7 @@ class StandardGame extends Pane {
     }
 
     private void initialize() {
+        this.setOpacity(0);
         Pane gamePane = new Pane();
         gameScreen = new GameScreen(WIDTH, HEIGHT - 30, gamePane);
         gamePane.setTranslateY(30);
@@ -51,9 +56,18 @@ class StandardGame extends Pane {
         score.setFill(Color.WHITE);
         score.setFont(new Font(15));
         getChildren().addAll(score, gamePane);
-        miniGames = new MiniGame[]{new TargetGame(WIDTH, HEIGHT), new ArrowsGame(WIDTH, HEIGHT), new BalanceGame(WIDTH, HEIGHT)};
+        miniGames = new MiniGame[]{new BalanceGame(WIDTH, HEIGHT), new ArrowsGame(WIDTH, HEIGHT), new TargetGame(WIDTH, HEIGHT)};
         gameScreen.setFirst((Window) miniGames[0]);
         setPlayKeyboardEvents();
+        fadeIn(event -> displayMessage(miniGames[0].getInstructionText()));
+    }
+
+    void fadeIn(EventHandler<ActionEvent> actionEvent) {
+        FadeTransition ft = new FadeTransition(Duration.millis(700), this);
+        ft.setFromValue(0);
+        ft.setToValue(1);
+        ft.setOnFinished(actionEvent);
+        ft.play();
     }
 
     void update(long now) {
@@ -87,7 +101,10 @@ class StandardGame extends Pane {
         double delta = (now - oldTime) / 1_000_000;
 
         for (int i = 0; i < level + 1; ++i)
-            miniGames[i].update(delta, now, keyboard);
+            if (!miniGames[i].update(delta, now, keyboard)) {
+                miniGames[i].showGameOver();
+                playing = false;
+            }
         oldTime = now;
     }
 
@@ -99,7 +116,7 @@ class StandardGame extends Pane {
         scene.setOnKeyPressed(event -> {
             playing = true;
             setPlayKeyboardEvents();
-            message.fadeOut().setOnFinished(event1 -> getChildren().removeAll(message));
+            message.fadeOut().setOnFinished(event1 -> getChildren().remove(message));
         });
     }
 }
