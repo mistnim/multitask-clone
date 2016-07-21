@@ -35,6 +35,9 @@ public class Menu extends StackPane {
 
         menuBox.setTranslateY(0);
         getChildren().addAll(bg, title, menuBox);
+    }
+
+    public void fadeIn() {
         FadeTransition ft = new FadeTransition(Duration.millis(1300), this);
         ft.setFromValue(0);
         ft.setToValue(1);

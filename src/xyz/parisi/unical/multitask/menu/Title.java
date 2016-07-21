@@ -17,7 +17,7 @@ import javafx.scene.text.Text;
 import javafx.util.Duration;
 
 public class Title extends StackPane {
-    Title(String name) {
+    public Title(String name) {
 
         LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
                 new Stop(0, Color.LIGHTBLUE),

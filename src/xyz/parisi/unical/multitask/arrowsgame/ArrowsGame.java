@@ -32,18 +32,8 @@ public class ArrowsGame extends Pane implements MiniGame, Window {
     }
 
     @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
     public String getInstructionText() {
-        return "Move up and down to avoid the arrows!\nUse the UP and DOWN arrow keys";
+        return "Move up and down to avoid the arrows!\nUse the E and D keys";
     }
 
     public ArrowsGame(double w, double h) {

@@ -16,7 +16,7 @@ import javafx.scene.text.Text;
  */
 
 public class MenuItem extends StackPane {
-    MenuItem(String name) {
+    public MenuItem(String name) {
         LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
                 new Stop(0, Color.DARKVIOLET),
                 new Stop(0.1, Color.BLACK),

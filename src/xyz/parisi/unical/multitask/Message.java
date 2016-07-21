@@ -4,6 +4,8 @@ import javafx.animation.Interpolator;
 import javafx.animation.KeyFrame;
 import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
@@ -29,22 +31,21 @@ class Message extends StackPane {
         setLayoutY(-HEIGHT / 2);
         Rectangle bg = new Rectangle(WIDTH, HEIGHT);
         bg.setFill(new Color(1, 1, 1, 0.9));
-        bg.setStroke(Color.BLACK);
+        //bg.setStroke(Color.DEEPPINK);
         bg.setStrokeWidth(2);
         Text message = new Text(text);
         message.setFont(new Font(13));
         message.setFill(Color.BLACK);
         getChildren().addAll(bg, message);
         setScaleX(0);
-        fadeIn();
     }
 
-    private void fadeIn() {
+    public void fadeIn(EventHandler<ActionEvent> event) {
         Timeline fadeIn = new Timeline();
         fadeIn.getKeyFrames().add(new KeyFrame(Duration.millis(350), new KeyValue(clip.radiusProperty(), 200, interpolator),
                 new KeyValue(this.scaleXProperty(), 1)));
         fadeIn.play();
-
+        fadeIn.setOnFinished(event);
     }
 
     Timeline fadeOut() {

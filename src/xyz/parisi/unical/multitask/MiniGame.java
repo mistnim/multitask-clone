@@ -5,8 +5,6 @@ public interface MiniGame {
 
     String getInstructionText();
 
-    void pause();
-    void resume();
     void showGameOver();
 
 }

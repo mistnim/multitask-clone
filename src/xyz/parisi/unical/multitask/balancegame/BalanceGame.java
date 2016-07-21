@@ -32,7 +32,7 @@ public class BalanceGame extends Pane implements MiniGame, Window {
 
         bar.setFill(Color.BLACK);
         bar.setRotate(0.2);
-        ball.setFill(Color.RED);
+        ball.setFill(Color.RED.brighter());
         objects.getChildren().addAll(bar, ball);
         objects.layoutXProperty().bind(myWidth.divide(2));
         objects.layoutYProperty().bind(myHeight.divide(2));
@@ -45,18 +45,8 @@ public class BalanceGame extends Pane implements MiniGame, Window {
     }
 
     @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
-    }
-
-    @Override
     public String getInstructionText() {
-        return "Keep the ball balanced on the platform!\nUse the LEFT and RIGHT arrow keys";
+        return "Keep the ball balanced on the platform!\nUse the S and F keys.";
     }
 
     @Override

@@ -9,7 +9,7 @@ import javafx.scene.shape.Line;
  * Created by daniele on 7/20/16.sa
  */
 public class MenuBox extends VBox {
-    MenuBox(MenuItem... items) {
+    public MenuBox(MenuItem... items) {
         setAlignment(Pos.CENTER);
         getChildren().add(createSeparator());
 

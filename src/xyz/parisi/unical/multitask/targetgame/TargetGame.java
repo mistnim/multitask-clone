@@ -22,7 +22,7 @@ public class TargetGame extends Pane implements MiniGame, Window {
 
     @Override
     public String getInstructionText() {
-        return null;
+        return "Spin to avoid the arrows! Use the W\nand R letters to spin.";
     }
 
     @Override
@@ -42,16 +42,6 @@ public class TargetGame extends Pane implements MiniGame, Window {
         objects.layoutYProperty().bind(myHeight.divide(2));
         objects.getChildren().addAll(ring, arrows);
         getChildren().addAll(bg, objects);
-    }
-
-    @Override
-    public void pause() {
-
-    }
-
-    @Override
-    public void resume() {
-
     }
 
     @Override
