@@ -19,7 +19,7 @@ public class BalanceGame extends Pane implements MiniGame, Window {
     private final SimpleDoubleProperty myHeight = new SimpleDoubleProperty();
     private final Ball ball = new Ball();
     private final Rectangle bar = new Rectangle(-50, -5, 100, 10);
-    private Pane objects = new Pane();
+    private final Pane objects = new Pane();
 
     public BalanceGame(double w, double h) {
         myWidth.set(w);
@@ -65,13 +65,5 @@ public class BalanceGame extends Pane implements MiniGame, Window {
         if (keyboard.isPressed(KeyCode.S))
             bar.setRotate(bar.getRotate() - 0.7);
         return ball.update(timeDelta, bar.getRotate());
-    }
-
-    void playIntro() {
-        Timeline timeline = new Timeline();
-        timeline.getKeyFrames().add(new KeyFrame(Duration.millis(500),
-                new KeyValue(myWidth, 300)));
-        timeline.play();
-        timeline.getOnFinished();
     }
 }

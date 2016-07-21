@@ -5,17 +5,14 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
 public class Menu extends StackPane {
-    private MenuItem play = new MenuItem("Play");
-    private MenuItem scores = new MenuItem("Scores");
+    private final MenuItem play = new MenuItem("Play");
+    private final MenuItem scores = new MenuItem("Scores");
 
     public Menu(double width, double height) {
         setAlignment(Pos.CENTER);

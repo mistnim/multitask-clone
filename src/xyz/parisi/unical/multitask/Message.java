@@ -6,7 +6,6 @@ import javafx.animation.KeyValue;
 import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -31,7 +30,6 @@ class Message extends StackPane {
         setLayoutY(-HEIGHT / 2);
         Rectangle bg = new Rectangle(WIDTH, HEIGHT);
         bg.setFill(new Color(1, 1, 1, 0.9));
-        //bg.setStroke(Color.DEEPPINK);
         bg.setStrokeWidth(2);
         Text message = new Text(text);
         message.setFont(new Font(13));
@@ -40,7 +38,7 @@ class Message extends StackPane {
         setScaleX(0);
     }
 
-    public void fadeIn(EventHandler<ActionEvent> event) {
+    void fadeIn(EventHandler<ActionEvent> event) {
         Timeline fadeIn = new Timeline();
         fadeIn.getKeyFrames().add(new KeyFrame(Duration.millis(350), new KeyValue(clip.radiusProperty(), 200, interpolator),
                 new KeyValue(this.scaleXProperty(), 1)));

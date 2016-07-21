@@ -30,9 +30,7 @@ public class Main extends Application {
 
         Menu menu = new Menu(WIDTH, HEIGHT);
 
-        menu.setOnScoresSelected(event -> {
-            appRoot.getChildren().addAll(new DisplayBestScores(WIDTH, HEIGHT));
-        });
+        menu.setOnScoresSelected(event -> appRoot.getChildren().addAll(new DisplayBestScores(WIDTH, HEIGHT)));
 
         menu.setOnPlaySelected(event -> {
             appRoot.getChildren().remove(menu);

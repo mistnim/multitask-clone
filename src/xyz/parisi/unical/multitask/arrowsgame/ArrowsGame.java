@@ -21,7 +21,7 @@ public class ArrowsGame extends Pane implements MiniGame, Window {
     private boolean alternate = true;
     private boolean isFirstUpdate = true;
     private long nextArrowTime;
-    private Pane objects = new Pane();
+    private final Pane objects = new Pane();
 
     public SimpleDoubleProperty myWidthProperty() {
         return myWidth;

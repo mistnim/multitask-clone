@@ -3,8 +3,8 @@ package xyz.parisi.unical.multitask.scores;
 import java.io.Serializable;
 
 public class Score implements Comparable<Score>, Serializable {
-    private String name;
-    private Integer score;
+    private final String name;
+    private final Integer score;
 
     @Override
     public int compareTo(Score o) {

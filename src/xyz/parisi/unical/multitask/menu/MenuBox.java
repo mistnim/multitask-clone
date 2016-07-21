@@ -5,9 +5,6 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 
-/**
- * Created by daniele on 7/20/16.sa
- */
 public class MenuBox extends VBox {
     public MenuBox(MenuItem... items) {
         setAlignment(Pos.CENTER);

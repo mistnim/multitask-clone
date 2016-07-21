@@ -20,7 +20,7 @@ public class SaveScore extends StackPane {
     private EventHandler<ActionEvent> onExit;
     private final double WIDTH;
     private final double HEIGHT;
-    private BestScoresList bestScoresList;
+    private final BestScoresList bestScoresList;
 
     public void setOnExit(EventHandler<ActionEvent> onExit) {
         this.onExit = onExit;

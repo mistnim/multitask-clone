@@ -12,7 +12,7 @@ import xyz.parisi.unical.multitask.menu.MenuItem;
 import xyz.parisi.unical.multitask.menu.Title;
 
 public class DisplayBestScores extends StackPane {
-    private double WIDTH;
+    private final double WIDTH;
 
     public DisplayBestScores(double width, double height) {
         this.WIDTH = width;

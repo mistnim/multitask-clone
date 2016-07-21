@@ -1,7 +1,6 @@
 package xyz.parisi.unical.multitask;
 
 import javafx.animation.Timeline;
-import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 
 class GameScreen {

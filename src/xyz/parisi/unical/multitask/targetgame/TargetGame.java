@@ -18,7 +18,7 @@ public class TargetGame extends Pane implements MiniGame, Window {
     private final Pane arrows = new Pane();
     private boolean isFirstUpdate = true;
     private long nextArrowTime;
-    private Pane objects = new Pane();
+    private final Pane objects = new Pane();
 
     @Override
     public String getInstructionText() {

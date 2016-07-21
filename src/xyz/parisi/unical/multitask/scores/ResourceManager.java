@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class ResourceManager {
+class ResourceManager {
     static void save (Serializable data, String filename) throws Exception {
         try (ObjectOutputStream oos = new ObjectOutputStream(Files.newOutputStream(Paths.get(filename)))) {
             oos.writeObject(data);

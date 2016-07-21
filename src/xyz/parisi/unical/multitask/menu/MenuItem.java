@@ -11,10 +11,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
-/**
- * Created by daniele on 7/20/16.sa
- */
-
 public class MenuItem extends StackPane {
     public MenuItem(String name) {
         LinearGradient gradient = new LinearGradient(0, 0, 1, 0, true, CycleMethod.NO_CYCLE,
@@ -43,12 +39,8 @@ public class MenuItem extends StackPane {
             text.setFill(Color.DARKGRAY);
         });
 
-        setOnMousePressed(event -> {
-            bg.setFill(Color.DARKVIOLET);
-        });
+        setOnMousePressed(event -> bg.setFill(Color.DARKVIOLET));
 
-        setOnMouseReleased(event -> {
-            bg.setFill(gradient);
-        });
+        setOnMouseReleased(event -> bg.setFill(gradient));
     }
 }

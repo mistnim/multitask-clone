@@ -32,7 +32,7 @@ class StandardGame extends Pane {
     private boolean playing = false;
     private final Text score = new Text();
 
-    private EventHandler<ActionEvent> gameOverEvent;
+    private final EventHandler<ActionEvent> gameOverEvent;
 
     public long getScore() {
         return (previouslyElapsedTime + currentlyElapsedTime) / 1_000_000_000L;
@@ -101,7 +101,7 @@ class StandardGame extends Pane {
         currentlyElapsedTime = now - levelStartTime;
 
         // launches new miniGames when it is their moment
-        if (level < 2 && currentlyElapsedTime > 5_000_000_000L) {
+        if (level < 2 && currentlyElapsedTime > 7_000_000_000L) {
             level += 1;
             isFirstFrame = true;
             previouslyElapsedTime += currentlyElapsedTime;

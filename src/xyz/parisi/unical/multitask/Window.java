@@ -8,8 +8,6 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.util.Duration;
 
-import java.util.Iterator;
-
 public interface Window {
     SimpleDoubleProperty myWidthProperty();
     SimpleDoubleProperty myHeightProperty();
