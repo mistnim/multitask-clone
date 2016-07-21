@@ -14,14 +14,10 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.util.Duration;
 
-/**
- * Created by daniele on 7/15/16.sa
- */
 class Message extends StackPane {
     private final int WIDTH = 290;
     private final int HEIGHT = 140;
     private final Circle clip = new Circle(WIDTH / 2, HEIGHT / 2, 0);
-    //private final Interpolator interpolator = Interpolator.SPLINE(0.7,0, 0.3, 1);
     private final Interpolator interpolator = Interpolator.LINEAR;
 
     Message(String text) {
