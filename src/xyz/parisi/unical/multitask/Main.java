@@ -9,6 +9,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import xyz.parisi.unical.multitask.menu.Menu;
 import xyz.parisi.unical.multitask.scores.BestScoresList;
+import xyz.parisi.unical.multitask.scores.DisplayBestScores;
 import xyz.parisi.unical.multitask.scores.SaveScore;
 import xyz.parisi.unical.multitask.scores.Score;
 
@@ -27,8 +28,12 @@ public class Main extends Application {
         Rectangle bg = new Rectangle(WIDTH, HEIGHT);
         bg.setFill(Color.BLACK);
 
-
         Menu menu = new Menu(WIDTH, HEIGHT);
+
+        menu.setOnScoresSelected(event -> {
+            appRoot.getChildren().addAll(new DisplayBestScores(WIDTH, HEIGHT));
+        });
+
         menu.setOnPlaySelected(event -> {
             appRoot.getChildren().remove(menu);
             standardGame = new StandardGame(scene, WIDTH, HEIGHT, gameOverEvent -> {

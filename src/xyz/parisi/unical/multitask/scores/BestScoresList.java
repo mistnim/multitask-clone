@@ -33,6 +33,8 @@ public class BestScoresList extends LinkedList<Score> implements Serializable {
         return false;
     }
 
+
+
     public static BestScoresList load() throws Exception {
         return (BestScoresList) ResourceManager.load("multitask.save");
     }

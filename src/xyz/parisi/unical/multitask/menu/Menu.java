@@ -13,12 +13,9 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.util.Duration;
 
-
-/**
- * Created by daniele on 7/20/16.sa
- */
 public class Menu extends StackPane {
-    MenuItem play = new MenuItem("Play");
+    private MenuItem play = new MenuItem("Play");
+    private MenuItem scores = new MenuItem("Scores");
 
     public Menu(double width, double height) {
         setAlignment(Pos.CENTER);
@@ -31,7 +28,7 @@ public class Menu extends StackPane {
         MenuItem exit = new MenuItem("Exit");
         exit.setOnMouseClicked(event -> System.exit(0));
 
-        MenuBox menuBox = new MenuBox(play, exit);
+        MenuBox menuBox = new MenuBox(play, scores, exit);
 
         menuBox.setTranslateY(0);
         getChildren().addAll(bg, title, menuBox);
@@ -42,6 +39,10 @@ public class Menu extends StackPane {
         ft.setFromValue(0);
         ft.setToValue(1);
         ft.play();
+    }
+
+    public void setOnScoresSelected(EventHandler<MouseEvent> event) {
+        scores.setOnMouseClicked(event);
     }
 
     public void setOnPlaySelected(EventHandler<ActionEvent> event) {

@@ -16,9 +16,6 @@ import xyz.parisi.unical.multitask.menu.MenuBox;
 import xyz.parisi.unical.multitask.menu.MenuItem;
 import xyz.parisi.unical.multitask.menu.Title;
 
-/**
- * Created by daniele on 7/21/16.sa
- */
 public class SaveScore extends StackPane {
     private EventHandler<ActionEvent> onExit;
     private final double WIDTH;
